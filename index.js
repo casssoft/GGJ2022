@@ -10,9 +10,22 @@ var camy;
 var tilesize = 64;
 var playerx = 250;
 var playery = 250;
+var darkMode = false;
+var showCollision = false;
 
 var tileSheet = new Image();
 tileSheet.src= "spritesheet.png";
+var darkTileSheet = new Image();
+darkTileSheet.src= "spritesheet_dark.png";
+
+function drawCharacter(x, y) {
+  context.fillStyle = "#0000FF";
+  context.fillRect(x, y, 32, 32);
+  if (showCollision == true) {
+    context.fillStyle = "#FF0000";
+    context.fillRect(x + 12, y + 16, 8, 16);
+  }
+}
 
 function drawTile(x, y, tileNum) {
   const numTilesPerRow = 19;
@@ -23,7 +36,12 @@ function drawTile(x, y, tileNum) {
 
   let tileY = Math.floor(tileNum/numTilesPerRow);
   let tileX = tileNum - tileY * numTilesPerRow;
-  context.drawImage(tileSheet,
+  let image = tileSheet;
+  if (darkMode) {
+    image = darkTileSheet;
+  }
+
+  context.drawImage(image,
     tileX * tileWidth, tileY * tileHeight,
     tileWidth, tileHeight,
     x, y, displayWidth, displayHeight);
@@ -91,6 +109,32 @@ function onKeyDown(e) {
   // TODO include wasd here?
   switch(e.keyCode) {
     case 37:
+      left = true;
+      break;
+    case 38:
+      up = true;
+      break;
+    case 39:
+      right = true;
+      break;
+    case 40:
+      down = true;
+      break;
+    case 32:
+      space = true;
+      darkMode = !darkMode;
+      break;
+    case 49: // 1
+      showCollision = !showCollision;
+      break;
+  }
+}
+
+function onKeyUp(e) {
+  e.preventDefault();
+  // TODO include wasd here?
+  switch(e.keyCode) {
+    case 37:
       left = false;
       break;
     case 38:
@@ -103,14 +147,9 @@ function onKeyDown(e) {
       down = false;
       break;
     case 32:
-       space = false;
-       break;
+      space = false;
+      break;
   }
-}
-
-function onKeyUp(e) {
-  e.preventDefault();
-  // TODO include any timed presses here
   console.log(e.keyCode);
 }
 
@@ -118,18 +157,81 @@ var frame = 0;
 
 function draw() {
   frame++;
+  let playerDirx = 0;
+  let playerDiry = 0;
+
+  if (right) {
+    playerDirx += 1;
+  }
+  if (left) {
+    playerDirx -= 1;
+  }
+  if (up) {
+    playerDiry -= 1;
+  }
+  if (down) {
+    playerDiry += 1;
+  }
+
+  var collisionLayer;
+  if (typeof TileMaps !== 'undefined') {
+    for (let l = 0; l < TileMaps["map"].layers.length; ++l) {
+      let layer = TileMaps["map"].layers[l];
+      if (layer.name === "collision") {
+        collisionLayer = layer;
+        break;
+      }
+    }
+  }
+
+  if (playerDirx != 0 || playerDiry != 0) {
+    // Normalize their movement vector
+    let magnitude = Math.sqrt(playerDirx * playerDirx + playerDiry * playerDiry);
+    let moveSpeed = 4;
+    let dx = (playerDirx/magnitude) * moveSpeed;
+    let dy = (playerDiry/magnitude) * moveSpeed;
+
+    if (typeof collisionLayer === 'undefined') {
+      // well fudge
+      console.log("map not loaded yet..");
+    } else {
+      // Collision testing
+      if (collidePlayer(collisionLayer, playerx + dx, playery)) {
+        if (!collidePlayer(collisionLayer, playerx, playery + dy)) {
+          playery += dy;
+        }
+      } else {
+        playerx += dx;
+        if (!collidePlayer(collisionLayer, playerx, playery + dy)) {
+          playery += dy;
+        }
+      }
+    }
+  }
+
+
   clear();
+  let tileSize = 32;
+  let drewPlayer = false;
   if (typeof TileMaps !== 'undefined') {
     let dataOffset = TileMaps["map"].tilesets[0].firstgid;
     for (let l = 0; l < TileMaps["map"].layers.length; ++l) {
       let layer = TileMaps["map"].layers[l];
+      // skip collision layer
+      if (layer.name == "collision" && !showCollision) {
+        continue;
+      }
+      if (layer.name == "foreground") {
+        // Before the foreground layer draw all the objects
+        drawObjectLayer();
+      }
       for (let y = 0 ; y < layer.height; ++y) {
         for (let x = 0 ; x < layer.width; ++x) {
           let index = x + y * layer.width;
           let data = layer.data[index];
           if (data != 0) {
             data -= dataOffset;
-            drawTile(layer.x + x * 32, layer.y + y * 32, data);
+            drawTile(layer.x + x * tileSize, layer.y + y * tileSize, data);
           }
         }
       }
@@ -137,7 +239,38 @@ function draw() {
   }
 }
 
+function drawObjectLayer() {
+  // TODO sort multiple objects
+  drawCharacter(playerx, playery);
+}
+
 function clear() {
   context.fillStyle = "#87CEEB";
   context.fillRect(0,0,WIDTH,HEIGHT);
 }
+
+function collidePlayer(layer, x, y) {
+  // Make the player collision little smaller
+  return collideLayer(layer, x + 12, y + 16, 8, 16);
+}
+
+function collideLayer(layer, x, y, sizeX, sizeY) {
+  let tileSize = 32;
+  // how many tiles is this taking up?
+  // assume positive units
+  let startx = Math.floor(x/tileSize);
+  let starty = Math.floor(y/tileSize);
+  let stopx = Math.ceil((x+ sizeX)/tileSize);
+  let stopy = Math.ceil((y+ sizeY)/tileSize);
+
+  for (let tx = startx; tx < stopx; tx++) {
+    for (let ty = starty; ty < stopy; ty++) {
+      if (layer.data[tx + ty * layer.width] != 0) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+
