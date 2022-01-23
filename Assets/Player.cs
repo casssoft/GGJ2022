@@ -14,18 +14,22 @@ public class Player : MonoBehaviour
 	void Awake() {
 		body = GetComponent<Rigidbody2D>();
 	}
-	
 
-    // Update is called once per frame
     void Update()
     {
         Vector2 playerInput;
 		playerInput.x = Input.GetAxis("Horizontal");
 		playerInput.y = Input.GetAxis("Vertical");
-		playerInput = Vector2.ClampMagnitude(playerInput, 1f);	
-		        Debug.Log("Hello: " + playerInput);
-		body.MovePosition(body.position + playerInput * 100* Time.deltaTime);
+		playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+		body.MovePosition(body.position + playerInput * 20 * Time.deltaTime);
+    }
 
-					
+    private void OnTriggerStay2D(Collider2D other) {
+        if (other)
+        {
+            if (Input.GetKeyDown(KeyCode.E)) {
+                GlobalVariables.followPlayer = !GlobalVariables.followPlayer;
+            }
+        }
     }
 }
