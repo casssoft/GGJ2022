@@ -24,7 +24,7 @@ public class sibling : MonoBehaviour
     }
 	
 	void Awake() {
-		sibling = GetComponent<Rigidbody2D>();
+		body = GetComponent<Rigidbody2D>();
 	}
 
     void Update()
@@ -38,7 +38,7 @@ public class sibling : MonoBehaviour
 
         // anxiety based on distance to enemy
         doggo = GameObject.Find("Doggo");
-        Anxiety = AnxietyLevel(Vector2.Distance(doggo.transform.position, sibling.transform.position));
+        Anxiety = AnxietyLevel(Vector2.Distance(doggo.transform.position, body.transform.position));
 
         TextMeshProUGUI ugui = this.GetComponentInChildren<TextMeshProUGUI>();
 
