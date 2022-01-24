@@ -26,19 +26,33 @@ public class Player : MonoBehaviour
 		playerInput = Vector2.ClampMagnitude(playerInput, 1f);
         body.velocity = playerInput * 5;
         //body.MovePosition(body.position + playerInput * 50 * Time.deltaTime);
-        anim.SetFloat("Horizontal", playerInput.x);
-        anim.SetFloat("Vertical", playerInput.y);
-        anim.SetFloat("SpeedX", Mathf.Abs(playerInput.x));
-        anim.SetFloat("SpeedY", Mathf.Abs(playerInput.y));
-        if (playerInput.x < -0.01f)
-        {
-            this.gameObject.transform.localScale = new Vector3(-1, 1, 1);
-        }
-        else
-        {
-            this.gameObject.transform.localScale = new Vector3(1, 1, 1);
-        }
 
+        // Control animations
+        this.gameObject.transform.localScale = new Vector3(1, 1, 1);
+        anim.SetFloat("Horizontal", playerInput.x);
+        if (playerInput.magnitude < 0.1)
+        {
+            anim.SetBool("WalkHorizontal", false);
+            anim.SetBool("WalkVertical", false);
+        } else if (Mathf.Abs(playerInput.x) > Mathf.Abs(playerInput.y))
+        {
+            if (playerInput.x < -0.01f)
+            {
+                // Flip the sprite if we are walking to the left
+                this.gameObject.transform.localScale = new Vector3(-1, 1, 1);
+            }
+
+            anim.SetBool("WalkHorizontal", true);
+            anim.SetBool("WalkVertical", false);
+        } else
+        {
+            anim.SetBool("WalkHorizontal", false);
+            anim.SetBool("WalkVertical", true);
+
+        }
+        anim.SetFloat("Vertical", playerInput.y);
+
+        // Handle interactions
         if (Input.GetKeyDown(KeyCode.E) && GlobalVariables.playerIsNearSibling)
         {
             GlobalVariables.followPlayer = !GlobalVariables.followPlayer;
