@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -38,14 +39,31 @@ public class Player : MonoBehaviour
             this.gameObject.transform.localScale = new Vector3(1, 1, 1);
         }
 
-    }
-
-    private void OnTriggerStay2D(Collider2D other) {
-        if (other)
+        if (Input.GetKeyDown(KeyCode.E) && GlobalVariables.playerIsNearSibling)
         {
-            if (Input.GetKeyDown(KeyCode.E)) {
-                GlobalVariables.followPlayer = !GlobalVariables.followPlayer;
-            }
+            GlobalVariables.followPlayer = !GlobalVariables.followPlayer;
+            // Turn off the text if you just grabbed ur sibling
+            // Turn on text if you just let them go
+            TextMeshProUGUI ugui = GlobalVariables.sibling.GetComponentInChildren<TextMeshProUGUI>();
+            ugui.enabled = !GlobalVariables.followPlayer;
+        }
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Sibling")
+        {
+            GlobalVariables.playerIsNearSibling = true;
+            TextMeshProUGUI ugui = collision.GetComponentInChildren<TextMeshProUGUI>();
+            ugui.enabled = true;
+        }
+    }
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Sibling")
+        {
+            GlobalVariables.playerIsNearSibling = false;
+            TextMeshProUGUI ugui = collision.GetComponentInChildren<TextMeshProUGUI>();
+            ugui.enabled = false;
         }
     }
 }
