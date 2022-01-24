@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
 
         // Control animations
         this.gameObject.transform.localScale = new Vector3(1, 1, 1);
-        anim.SetFloat("Horizontal", playerInput.x);
         if (playerInput.magnitude < 0.1)
         {
             anim.SetBool("WalkHorizontal", false);
