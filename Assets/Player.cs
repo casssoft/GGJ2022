@@ -10,9 +10,11 @@ public class Player : MonoBehaviour
         
     }
 	Rigidbody2D body;
-	
-	void Awake() {
+    public Animator anim;
+
+    void Awake() {
 		body = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 	}
 
     void Update()
@@ -21,7 +23,21 @@ public class Player : MonoBehaviour
 		playerInput.x = Input.GetAxis("Horizontal");
 		playerInput.y = Input.GetAxis("Vertical");
 		playerInput = Vector2.ClampMagnitude(playerInput, 1f);
-		body.MovePosition(body.position + playerInput * 20 * Time.deltaTime);
+        body.velocity = playerInput * 5;
+        //body.MovePosition(body.position + playerInput * 50 * Time.deltaTime);
+        anim.SetFloat("Horizontal", playerInput.x);
+        anim.SetFloat("Vertical", playerInput.y);
+        anim.SetFloat("SpeedX", Mathf.Abs(playerInput.x));
+        anim.SetFloat("SpeedY", Mathf.Abs(playerInput.y));
+        if (playerInput.x < -0.01f)
+        {
+            this.gameObject.transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            this.gameObject.transform.localScale = new Vector3(1, 1, 1);
+        }
+
     }
 
     private void OnTriggerStay2D(Collider2D other) {
