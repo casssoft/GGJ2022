@@ -69,12 +69,21 @@ public class Player : MonoBehaviour
             // TextMeshProUGUI ugui = collision.GetComponentInChildren<TextMeshProUGUI>();
             // ugui.enabled = true;
         }
+
+        if (collision.gameObject.name == "Frisbee") {
+            GlobalVariables.hasFrisbee = true;
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.name == "Doggo" && GlobalVariables.hasFrisbee == true) {
+            GlobalVariables.gaveFrisbeeToDoggo = true;
+        }
     }
     public void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Sibling")
         {
-            // GlobalVariables.playerIsNearSibling = false;
+            GlobalVariables.playerIsNearSibling = false;
             // TextMeshProUGUI ugui = collision.GetComponentInChildren<TextMeshProUGUI>();
             // ugui.enabled = false;
         }

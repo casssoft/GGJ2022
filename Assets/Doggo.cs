@@ -5,16 +5,21 @@ using TMPro;
 
 public class Doggo : MonoBehaviour
 {
-    // Start is called before the first frame update
+    GameObject doggo;
+
     void Start()
     {
-        
+        doggo = GameObject.Find("Doggo");
     }
 
-    // Update is called once per frame
     void Update()
     {
         TextMeshProUGUI ugui = this.GetComponentInChildren<TextMeshProUGUI>();
-        ugui.enabled = !GlobalVariables.followPlayer;
+
+        if (GlobalVariables.gaveFrisbeeToDoggo) {
+            ugui.text = "Yip Yip!";
+
+            // TODO: Move the doggo to some location out of the way
+        }
     }
 }

@@ -45,6 +45,10 @@ public class sibling : MonoBehaviour
         // update character text to represent anxiety (for now)
         if (Anxiety == 2) {
             ugui.text = "NOOOO";
+            GlobalVariables.followPlayer = false;
+
+            // TODO: move the sibling back to a starting location
+
         }
         if (Anxiety == 1) {
             ugui.text = "Uh oh....";
