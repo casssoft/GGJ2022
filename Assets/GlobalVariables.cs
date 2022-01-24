@@ -8,7 +8,7 @@ using UnityEngine;
     public static GameObject sibling;
 
     void Start() {
-           followPlayer = false;
+         followPlayer = false;
         playerIsNearSibling = false;
         sibling = GameObject.Find("Sibling");
       }

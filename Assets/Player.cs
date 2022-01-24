@@ -57,8 +57,8 @@ public class Player : MonoBehaviour
             GlobalVariables.followPlayer = !GlobalVariables.followPlayer;
             // Turn off the text if you just grabbed ur sibling
             // Turn on text if you just let them go
-            TextMeshProUGUI ugui = GlobalVariables.sibling.GetComponentInChildren<TextMeshProUGUI>();
-            ugui.enabled = !GlobalVariables.followPlayer;
+            // TextMeshProUGUI ugui = GlobalVariables.sibling.GetComponentInChildren<TextMeshProUGUI>();
+            // ugui.enabled = !GlobalVariables.followPlayer;
         }
     }
     public void OnTriggerEnter2D(Collider2D collision)
@@ -66,17 +66,17 @@ public class Player : MonoBehaviour
         if (collision.gameObject.name == "Sibling")
         {
             GlobalVariables.playerIsNearSibling = true;
-            TextMeshProUGUI ugui = collision.GetComponentInChildren<TextMeshProUGUI>();
-            ugui.enabled = true;
+            // TextMeshProUGUI ugui = collision.GetComponentInChildren<TextMeshProUGUI>();
+            // ugui.enabled = true;
         }
     }
     public void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Sibling")
         {
-            GlobalVariables.playerIsNearSibling = false;
-            TextMeshProUGUI ugui = collision.GetComponentInChildren<TextMeshProUGUI>();
-            ugui.enabled = false;
+            // GlobalVariables.playerIsNearSibling = false;
+            // TextMeshProUGUI ugui = collision.GetComponentInChildren<TextMeshProUGUI>();
+            // ugui.enabled = false;
         }
     }
 }
