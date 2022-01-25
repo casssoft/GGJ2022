@@ -60,10 +60,10 @@ public class Sibling : MonoBehaviour
             GlobalVariables.followPlayer = false;
             inFear = true;
         }
-        if (Anxiety == 1) {
+        if (Anxiety == 1 && !inFear) {
             ugui.text = "Uh oh....";
         }
-        if (Anxiety == 0) {
+        if (Anxiety == 0 && !inFear) {
             ugui.text = "";
         }
 
