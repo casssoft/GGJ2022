@@ -6,10 +6,12 @@ using TMPro;
 public class Doggo : MonoBehaviour
 {
     GameObject doggo;
+    GameObject waypoint;
 
     void Start()
     {
         doggo = GameObject.Find("Doggo");
+        waypoint = GameObject.Find("WayPointDoggo");
     }
 
     void Update()
@@ -19,7 +21,7 @@ public class Doggo : MonoBehaviour
         if (GlobalVariables.gaveFrisbeeToDoggo) {
             ugui.text = "Yip Yip!";
 
-            // TODO: Move the doggo to some location out of the way
+            transform.position = Vector2.MoveTowards(doggo.transform.position, waypoint.transform.position, 2*Time.deltaTime);
         }
     }
 }

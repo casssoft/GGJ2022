@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class sibling : MonoBehaviour
+public class Sibling : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
     Rigidbody2D body;
+    GameObject sibling;
     GameObject player;
     GameObject doggo;
+    GameObject waypoint;
+    public bool inFear;
     public int Anxiety;
+
+    void Start()
+    {
+        waypoint = GameObject.Find("WayPointSibling");
+        sibling = GameObject.Find("Sibling");
+    }
 
     private int AnxietyLevel(float distanceToDanger) {
         if (distanceToDanger <= 4) {
@@ -43,12 +48,17 @@ public class sibling : MonoBehaviour
         TextMeshProUGUI ugui = this.GetComponentInChildren<TextMeshProUGUI>();
 
         // update character text to represent anxiety (for now)
+        if (inFear){
+            transform.position = Vector2.MoveTowards(sibling.transform.position, waypoint.transform.position, 3*Time.deltaTime);
+            if (sibling.transform.position == waypoint.transform.position) {
+                inFear = false;
+            }
+        }
+
         if (Anxiety == 2) {
             ugui.text = "NOOOO";
             GlobalVariables.followPlayer = false;
-
-            // TODO: move the sibling back to a starting location
-
+            inFear = true;
         }
         if (Anxiety == 1) {
             ugui.text = "Uh oh....";
