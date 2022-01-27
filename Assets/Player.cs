@@ -2,16 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Fungus;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 	Rigidbody2D body;
     public Animator anim;
+    public Flowchart flowchart;
 
     void Awake() {
 		body = GetComponent<Rigidbody2D>();
@@ -68,15 +65,21 @@ public class Player : MonoBehaviour
             GlobalVariables.playerIsNearSibling = true;
             // TextMeshProUGUI ugui = collision.GetComponentInChildren<TextMeshProUGUI>();
             // ugui.enabled = true;
+
+            flowchart.ExecuteBlock("Sibling First Chat");
         }
 
         if (collision.gameObject.name == "Frisbee") {
             GlobalVariables.hasFrisbee = true;
             Destroy(collision.gameObject);
+
+
         }
 
         if (collision.gameObject.name == "Doggo" && GlobalVariables.hasFrisbee == true) {
             GlobalVariables.gaveFrisbeeToDoggo = true;
+        } else if (collision.gameObject.name == "Doggo") {
+            flowchart.ExecuteBlock("Doggo");
         }
     }
     public void OnTriggerExit2D(Collider2D collision)
