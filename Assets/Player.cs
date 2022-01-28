@@ -52,6 +52,8 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && GlobalVariables.playerIsNearSibling)
         {
             GlobalVariables.followPlayer = !GlobalVariables.followPlayer;
+            flowchart.ExecuteBlock("First dark mode");
+
             // Turn off the text if you just grabbed ur sibling
             // Turn on text if you just let them go
             // TextMeshProUGUI ugui = GlobalVariables.sibling.GetComponentInChildren<TextMeshProUGUI>();
