@@ -1544,7 +1544,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1615,7 +1615,6 @@ GameObject:
   - component: {fileID: 1278510519}
   - component: {fileID: 1278510529}
   - component: {fileID: 1278510528}
-  - component: {fileID: 1278510527}
   - component: {fileID: 1278510535}
   - component: {fileID: 1278510534}
   - component: {fileID: 1278510533}
@@ -1732,7 +1731,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -34.775444
     y: -520.02234
-    width: 77
+    width: 74.59015
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1774,21 +1773,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: -1.3068085, y: 633.2936}
+  scrollPos: {x: 200.28354, y: 616.4319}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 373
-  zoom: 1
+  zoom: 0.6100004
   scrollViewRect:
     serializedVersion: 2
     x: -810.0176
     y: -920.02234
     width: 1939.0176
     height: 2009.5223
-  selectedBlocks:
-  - {fileID: 1278510537}
-  selectedCommands:
-  - {fileID: 1278510538}
+  selectedBlocks: []
+  selectedCommands: []
   variables:
   - {fileID: 1278510524}
   - {fileID: 1278510541}
@@ -1816,22 +1813,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1278510527
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1278510518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000864f8e9e1748a39807861d0e60e29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 1278510529}
-  suppressBlockAutoSelect: 0
-  keyPressType: 0
-  keyCode: 127
 --- !u!114 &1278510528
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1875,14 +1856,14 @@ MonoBehaviour:
     serializedVersion: 2
     x: -37.925266
     y: -460.86365
-    width: 87
+    width: 84.42621
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 67
   blockName: Doggo
   description: 
-  eventHandler: {fileID: 1278510527}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 1278510528}
   - {fileID: 1278510535}
@@ -1982,9 +1963,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 116.91418
+    x: 118.34275
     y: -498.6489
-    width: 145
+    width: 141.80322
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -2087,7 +2068,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 89.107666
     y: -380.29355
-    width: 136
+    width: 131.96716
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -2102,7 +2083,7 @@ MonoBehaviour:
   suppressAllAutoSelections: 0
 --- !u!114 &1278510538
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2254,7 +2235,7 @@ MonoBehaviour:
     vector3Val: {x: 0, y: 0, z: 0}
 --- !u!114 &1278510539
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2497,7 +2478,7 @@ MonoBehaviour:
     vector3Val: {x: 0, y: 0, z: 0}
 --- !u!114 &1278510540
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
