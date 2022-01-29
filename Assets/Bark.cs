@@ -20,4 +20,14 @@ public class Bark : MonoBehaviour
     {
         
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.name == "Sibling" || collision.gameObject.name == "Player") {
+            GlobalVariables.followPlayer = false;
+            Sibling.inFear = true;
+            Destroy(gameObject);
+        }
+    }
 }

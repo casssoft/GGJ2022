@@ -10,7 +10,7 @@ public class Sibling : MonoBehaviour
     public GameObject doggo;
     public GameObject waypoint;
     public TextMeshProUGUI siblingGUI;
-    public bool inFear = false;
+    public static bool inFear = false;
     public int Anxiety;
     private Vector2 prevPos;
     private Animator anim;

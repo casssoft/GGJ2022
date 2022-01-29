@@ -57,8 +57,6 @@ public class Doggo : MonoBehaviour
         void Bark(){
             if (Time.time - lastBark > delayBetweenBarks) {
                 GameObject bark = Instantiate(barkPrefab, doggo.transform.position, this.gameObject.transform.rotation);
-                bark.tag = "Bark";
-
                 lastBark = Time.time;
             }
         }
