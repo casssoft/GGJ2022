@@ -1623,7 +1623,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -34.775444
     y: -520.02234
-    width: 77.868835
+    width: 74.59015
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1676,8 +1676,7 @@ MonoBehaviour:
     y: -920.02234
     width: 1939.0176
     height: 2009.5223
-  selectedBlocks:
-  - {fileID: 1278510529}
+  selectedBlocks: []
   selectedCommands: []
   variables:
   - {fileID: 1278510524}
@@ -1749,7 +1748,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -37.925266
     y: -460.86365
-    width: 88.52457
+    width: 84.42621
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1858,7 +1857,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 118.34275
     y: -498.6489
-    width: 149.18027
+    width: 141.80322
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1961,7 +1960,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 89.107666
     y: -380.29355
-    width: 139.34421
+    width: 131.96716
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -2792,6 +2791,7 @@ GameObject:
   - component: {fileID: 1318149371}
   - component: {fileID: 1318149370}
   - component: {fileID: 1318149369}
+  - component: {fileID: 1318149374}
   m_Layer: 0
   m_Name: Doggo
   m_TagString: Doggo
@@ -2811,6 +2811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7365bc6e8c934c1ea5498d639e4496d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
 --- !u!50 &1318149370
 Rigidbody2D:
   serializedVersion: 4
@@ -2888,8 +2889,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.4245283, g: 0.3224012, b: 0.3224012, a: 1}
+  m_Sprite: {fileID: 7820728437481062033, guid: 39471f70e4bd70944ad23ab6a8d59e81, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2914,6 +2915,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1318149374
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318149368}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1ba1c49fafaacd34c930f3f0ce94f725, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1421445681
 GameObject:
   m_ObjectHideFlags: 0
@@ -10026,7 +10046,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 1
+      m_AllTileFlags: 1073741825
   - first: {x: 13, y: -8, z: 0}
     second:
       serializedVersion: 2
@@ -10146,7 +10166,7 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 1
+      m_AllTileFlags: 1073741825
   - first: {x: 13, y: -7, z: 0}
     second:
       serializedVersion: 2
