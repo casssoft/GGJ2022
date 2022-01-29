@@ -2812,6 +2812,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7365bc6e8c934c1ea5498d639e4496d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barkPrefab: {fileID: 1714076962}
+  delayBetweenBarks: 3
 --- !u!50 &1318149370
 Rigidbody2D:
   serializedVersion: 4
@@ -3308,6 +3310,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598029415}
   m_CullTransparentMesh: 1
+--- !u!1 &1714076962 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5365644086719059033, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
+  m_PrefabInstance: {fileID: 3085362256314495657}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1714076963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714076962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451cd641127b74f19837f81f8fda1294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  rb: {fileID: 1714076966}
+  collider: {fileID: 1714076964}
+--- !u!61 &1714076964 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2367663792224484781, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
+  m_PrefabInstance: {fileID: 3085362256314495657}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1714076966 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 8211373739847604434, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
+  m_PrefabInstance: {fileID: 3085362256314495657}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1717693689
 GameObject:
   m_ObjectHideFlags: 0
@@ -12094,6 +12126,63 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1001 &3085362256314495657
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 329232513635086760, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 329232513635086760, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.8965716
+      objectReference: {fileID: 0}
+    - target: {fileID: 329232513635086760, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.77116
+      objectReference: {fileID: 0}
+    - target: {fileID: 329232513635086760, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.86046827
+      objectReference: {fileID: 0}
+    - target: {fileID: 329232513635086760, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 329232513635086760, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 329232513635086760, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 329232513635086760, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 329232513635086760, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 329232513635086760, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 329232513635086760, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5365644086719059033, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
+      propertyPath: m_Name
+      value: Bark Bullet
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
 --- !u!1001 &6340463691364805566
 PrefabInstance:
   m_ObjectHideFlags: 0
