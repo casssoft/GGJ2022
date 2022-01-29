@@ -5,18 +5,16 @@ using TMPro;
 
 public class Sibling : MonoBehaviour
 {
-    Rigidbody2D body;
-    GameObject sibling;
-    GameObject player;
-    GameObject doggo;
-    GameObject waypoint;
-    public bool inFear;
+    public Rigidbody2D rb;
+    public GameObject player;
+    public GameObject doggo;
+    public GameObject waypoint;
+    public TextMeshProUGUI siblingGUI;
+    public bool inFear = false;
     public int Anxiety;
 
     void Start()
     {
-        waypoint = GameObject.Find("WayPointSibling");
-        sibling = GameObject.Find("Sibling");
     }
 
     private int AnxietyLevel(float distanceToDanger) {
@@ -27,44 +25,35 @@ public class Sibling : MonoBehaviour
         } 
         return 0;
     }
-	
-	void Awake() {
-		body = GetComponent<Rigidbody2D>();
-	}
 
     void Update()
     {
         // following player 
         if(GlobalVariables.followPlayer) {
-
-            player = GameObject.Find("Player");
-            body.transform.position = player.transform.position;
+            rb.transform.position = player.transform.position;
         }
 
         // anxiety based on distance to enemy
-        doggo = GameObject.Find("Doggo");
-        Anxiety = AnxietyLevel(Vector2.Distance(doggo.transform.position, body.transform.position));
-
-        TextMeshProUGUI ugui = this.GetComponentInChildren<TextMeshProUGUI>();
+        Anxiety = AnxietyLevel(Vector2.Distance(doggo.transform.position, rb.transform.position));
 
         // update character text to represent anxiety (for now)
         if (inFear){
-            transform.position = Vector2.MoveTowards(sibling.transform.position, waypoint.transform.position, 3*Time.deltaTime);
-            if (sibling.transform.position == waypoint.transform.position) {
+            transform.position = Vector2.MoveTowards(rb.transform.position, waypoint.transform.position, 3*Time.deltaTime);
+            if (rb.transform.position == waypoint.transform.position) {
                 inFear = false;
             }
         }
 
         if (Anxiety == 2) {
-            ugui.text = "NOOOO";
+            siblingGUI.text = "NOOOO";
             GlobalVariables.followPlayer = false;
             inFear = true;
         }
         if (Anxiety == 1 && !inFear) {
-            ugui.text = "Uh oh....";
+            siblingGUI.text = "Uh oh....";
         }
         if (Anxiety == 0 && !inFear) {
-            ugui.text = "";
+            siblingGUI.text = "";
         }
 
     }
