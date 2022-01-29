@@ -14,14 +14,12 @@ public class Sibling : MonoBehaviour
     public int Anxiety;
     private Vector2 prevPos;
     private Animator anim;
-    void Awake()
-    {
+    void Awake() {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
 
-    void Start()
-    {
+    void Start() {
         prevPos = rb.transform.position;
     }
 
@@ -30,12 +28,11 @@ public class Sibling : MonoBehaviour
             return 2;
         } else if (distanceToDanger <= 8) {
             return 1;
-        } 
+        }
         return 0;
     }
 
-    void Update()
-    {
+    void Update() {
         // following player 
         if(GlobalVariables.followPlayer) {
             Vector2 toPlayer = player.transform.position - rb.transform.position;
@@ -50,7 +47,7 @@ public class Sibling : MonoBehaviour
         Anxiety = AnxietyLevel(Vector2.Distance(doggo.transform.position, rb.transform.position));
 
         // update character text to represent anxiety (for now)
-        if (inFear){
+        if (inFear) {
             transform.position = Vector2.MoveTowards(rb.transform.position, waypoint.transform.position, 3*Time.deltaTime);
             if (rb.transform.position == waypoint.transform.position) {
                 inFear = false;
@@ -72,29 +69,18 @@ public class Sibling : MonoBehaviour
         // Animate this tiny kid
         Vector2 pos = rb.transform.position;
         Vector2 velocity = pos - prevPos;
-        if (velocity.x == 0 && velocity.y == 0)
-        {
-            anim.Play("idle");
-        }
-        else if (Mathf.Abs(velocity.x) > Mathf.Abs(velocity.y))
-        {
-            if (velocity.x > 0)
-            {
+        if (velocity.x == 0 && velocity.y == 0) {
+            anim.Play("cry");
+        } else if (Mathf.Abs(velocity.x) > Mathf.Abs(velocity.y)) {
+            if (velocity.x > 0) {
                 anim.Play("walkright");
-            }
-            else
-            {
+            } else {
                 anim.Play("walkleft");
             }
-        }
-        else
-        {
-            if (velocity.y > 0)
-            {
+        } else {
+            if (velocity.y > 0) {
                 anim.Play("walkup");
-            }
-            else
-            {
+            } else {
                 anim.Play("walkdown");
             }
         }
