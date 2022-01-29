@@ -6,16 +6,13 @@ using Fungus;
 
 public class Player : MonoBehaviour
 {
-	Rigidbody2D body;
+	public Rigidbody2D body;
     public GameObject frisbeePrefab;
     public Animator anim;
     public Flowchart flowchart;
     public static bool hasFrisbee;
+    public static bool playerIsNearSibling;
 
-    void Awake() {
-		body = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-	}
 
     void Update()
     {   
@@ -57,7 +54,7 @@ public class Player : MonoBehaviour
         anim.SetFloat("Vertical", playerInput.y);
 
         // Handle interactions
-        if (Input.GetKeyDown(KeyCode.E) && GlobalVariables.playerIsNearSibling)
+        if (Input.GetKeyDown(KeyCode.E) && playerIsNearSibling)
         {
             GlobalVariables.followPlayer = !GlobalVariables.followPlayer;
             flowchart.ExecuteBlock("First dark mode");
@@ -74,7 +71,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.name == "Sibling")
         {
-            GlobalVariables.playerIsNearSibling = true;
+            playerIsNearSibling = true;
             // TextMeshProUGUI ugui = collision.GetComponentInChildren<TextMeshProUGUI>();
             // ugui.enabled = true;
 
@@ -96,14 +93,15 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.name == "Sibling")
         {
-            GlobalVariables.playerIsNearSibling = false;
+            playerIsNearSibling = false;
             // TextMeshProUGUI ugui = collision.GetComponentInChildren<TextMeshProUGUI>();
             // ugui.enabled = false;
         }
     }
 
     void Shoot() {
-        Instantiate(frisbeePrefab, body.position, this.gameObject.transform.rotation);
+        GameObject frisbee = Instantiate(frisbeePrefab, body.position, this.gameObject.transform.rotation);
+        frisbee.tag = "Frisbee";
         hasFrisbee = false;
     }
 }

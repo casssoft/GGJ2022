@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class FrisbeeBullet : MonoBehaviour
 {
-
     public float speed = 20f;
     public Rigidbody2D rb;
-    public static float cooldown;
     public Collider2D collider;
+    public Vector2 frisbeePickupVector = new Vector2(0.0f, 0.0f);
     
-    // Start is called before the first frame update
     void Start()
     {
         rb.velocity = transform.right * speed;
     }
 
     void Update() {
-        cooldown -= Time.deltaTime;
-
-        if (cooldown < 0) {
+        // Allow Player to pickup the object once it has slowed down
+        if ((rb.velocity - frisbeePickupVector).magnitude < 1 ) {
             collider.isTrigger = true;
         }
     }
