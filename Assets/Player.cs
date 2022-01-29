@@ -7,8 +7,10 @@ using Fungus;
 public class Player : MonoBehaviour
 {
 	Rigidbody2D body;
+    public GameObject frisbeePrefab;
     public Animator anim;
     public Flowchart flowchart;
+    public static bool hasFrisbee;
 
     void Awake() {
 		body = GetComponent<Rigidbody2D>();
@@ -16,7 +18,13 @@ public class Player : MonoBehaviour
 	}
 
     void Update()
-    {
+    {   
+        // Frisbee throwing behavior 
+        if (Input.GetButtonDown("Fire1") && hasFrisbee) {
+            Shoot();
+        }
+
+
         Vector2 playerInput;
 		playerInput.x = Input.GetAxis("Horizontal");
 		playerInput.y = Input.GetAxis("Vertical");
@@ -60,6 +68,8 @@ public class Player : MonoBehaviour
             // ugui.enabled = !GlobalVariables.followPlayer;
         }
     }
+
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Sibling")
@@ -71,14 +81,12 @@ public class Player : MonoBehaviour
             flowchart.ExecuteBlock("Sibling First Chat");
         }
 
-        if (collision.gameObject.name == "Frisbee") {
-            GlobalVariables.hasFrisbee = true;
+        if (collision.gameObject.tag == "Frisbee") {
+            hasFrisbee = true;
             Destroy(collision.gameObject);
-
-
         }
 
-        if (collision.gameObject.name == "Doggo" && GlobalVariables.hasFrisbee == true) {
+        if (collision.gameObject.name == "Doggo" && hasFrisbee == true) {
             GlobalVariables.gaveFrisbeeToDoggo = true;
         } else if (collision.gameObject.name == "Doggo") {
             flowchart.ExecuteBlock("Doggo");
@@ -92,5 +100,10 @@ public class Player : MonoBehaviour
             // TextMeshProUGUI ugui = collision.GetComponentInChildren<TextMeshProUGUI>();
             // ugui.enabled = false;
         }
+    }
+
+    void Shoot() {
+        Instantiate(frisbeePrefab, body.position, this.gameObject.transform.rotation);
+        hasFrisbee = false;
     }
 }
