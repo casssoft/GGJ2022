@@ -12,13 +12,17 @@ public class Sibling : MonoBehaviour
     public TextMeshProUGUI siblingGUI;
     public bool inFear = false;
     public int Anxiety;
+    private Vector2 prevPos;
+    private Animator anim;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void Start()
     {
+        prevPos = rb.transform.position;
     }
 
     private int AnxietyLevel(float distanceToDanger) {
@@ -34,7 +38,12 @@ public class Sibling : MonoBehaviour
     {
         // following player 
         if(GlobalVariables.followPlayer) {
-            rb.transform.position = player.transform.position;
+            Vector2 toPlayer = player.transform.position - rb.transform.position;
+            if (toPlayer.magnitude > 1)
+            {
+                toPlayer.Normalize();
+                rb.transform.position += new Vector3(toPlayer.x, toPlayer.y, 0) * Time.deltaTime * 3.5f;
+            }
         }
 
         // anxiety based on distance to enemy
@@ -60,6 +69,36 @@ public class Sibling : MonoBehaviour
             siblingGUI.text = "";
         }
 
+        // Animate this tiny kid
+        Vector2 pos = rb.transform.position;
+        Vector2 velocity = pos - prevPos;
+        if (velocity.x == 0 && velocity.y == 0)
+        {
+            anim.Play("idle");
+        }
+        else if (Mathf.Abs(velocity.x) > Mathf.Abs(velocity.y))
+        {
+            if (velocity.x > 0)
+            {
+                anim.Play("walkright");
+            }
+            else
+            {
+                anim.Play("walkleft");
+            }
+        }
+        else
+        {
+            if (velocity.y > 0)
+            {
+                anim.Play("walkup");
+            }
+            else
+            {
+                anim.Play("walkdown");
+            }
+        }
+        prevPos = rb.transform.position;
     }
 
 }
