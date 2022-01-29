@@ -1467,8 +1467,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2eddef185341154d83aa1d684f871d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  body: {fileID: 1056404940}
   frisbeePrefab: {fileID: 6340463691439978821, guid: 38ce1afc887d94656a655ad18e29acf5, type: 3}
-  anim: {fileID: 0}
+  anim: {fileID: 1056404945}
   flowchart: {fileID: 1278510525}
 --- !u!95 &1056404945
 Animator:
