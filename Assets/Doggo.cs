@@ -12,6 +12,12 @@ public class Doggo : MonoBehaviour
     public float delayBetweenBarks = 3;
     float lastBark;
     public TextMeshProUGUI ugui;
+    public Animator anim;
+    private Vector2 prevPos; // for calculating animation
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     void Start()
     {
@@ -20,6 +26,7 @@ public class Doggo : MonoBehaviour
         waypoint = GameObject.Find("WayPointDoggo");
         lastBark = Time.time;
         ugui = this.GetComponentInChildren<TextMeshProUGUI>();
+        prevPos = transform.position;
     }
 
     void Update()
@@ -55,5 +62,30 @@ public class Doggo : MonoBehaviour
                 lastBark = Time.time;
             }
         }
+        Vector2 pos = transform.position;
+        Vector2 velocity = pos - prevPos;
+        if (velocity.x == 0 && velocity.y == 0)
+        {
+            anim.Play("idle");
+        } else if (Mathf.Abs(velocity.x) > Mathf.Abs(velocity.y))
+        {
+            if (velocity.x > 0)
+            {
+                anim.Play("walkright");
+            } else
+            {
+                anim.Play("walkleft");
+            }
+        } else
+        {
+            if (velocity.y > 0)
+            {
+                anim.Play("walkup");
+            } else
+            {
+                anim.Play("walkdown");
+            }
+        }
+        prevPos = transform.position;
     }
 }

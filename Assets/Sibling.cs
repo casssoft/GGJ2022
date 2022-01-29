@@ -12,6 +12,10 @@ public class Sibling : MonoBehaviour
     public TextMeshProUGUI siblingGUI;
     public bool inFear = false;
     public int Anxiety;
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void Start()
     {
