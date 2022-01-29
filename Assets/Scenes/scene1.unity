@@ -912,7 +912,6 @@ MonoBehaviour:
   doggo: {fileID: 1318149368}
   waypoint: {fileID: 351043459}
   siblingGUI: {fileID: 401288336}
-  inFear: 0
   Anxiety: 0
 --- !u!58 &424189768
 CircleCollider2D:
@@ -1652,7 +1651,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -34.775444
     y: -521.8406
-    width: 76.53059
+    width: 77.550995
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1797,7 +1796,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -37.925266
     y: -460.86365
-    width: 82.65303
+    width: 87.755066
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1906,7 +1905,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 118.34275
     y: -498.6489
-    width: 133.6734
+    width: 146.93869
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -2009,7 +2008,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 92.96667
     y: -380.29355
-    width: 127.55095
+    width: 137.75502
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -2862,7 +2861,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 269.45944
     y: -380.49936
-    width: 105.10199
+    width: 112.24484
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -2945,7 +2944,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.5
 --- !u!212 &1318149372
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3443,17 +3442,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   rb: {fileID: 1714076966}
-  collider: {fileID: 1714076964}
---- !u!61 &1714076964 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 2367663792224484781, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
-  m_PrefabInstance: {fileID: 3085362256314495657}
-  m_PrefabAsset: {fileID: 0}
+  collider: {fileID: 1714076967}
 --- !u!50 &1714076966 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 8211373739847604434, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
   m_PrefabInstance: {fileID: 3085362256314495657}
   m_PrefabAsset: {fileID: 0}
+--- !u!58 &1714076967
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714076962}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &1717693689
 GameObject:
   m_ObjectHideFlags: 0
@@ -12223,11 +12233,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 329232513635086760, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.8965716
+      value: 5.63
       objectReference: {fileID: 0}
     - target: {fileID: 329232513635086760, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.77116
+      value: 6.24
       objectReference: {fileID: 0}
     - target: {fileID: 329232513635086760, guid: 7bc5d95632b6341008496ca589522cb9, type: 3}
       propertyPath: m_LocalPosition.z

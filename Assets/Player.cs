@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
     }
 
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Sibling")
         {
@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
             flowchart.ExecuteBlock("Doggo");
         }
     }
-    public void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Sibling")
         {
