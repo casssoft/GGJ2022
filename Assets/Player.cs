@@ -83,9 +83,7 @@ public class Player : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        if (collision.gameObject.name == "Doggo" && hasFrisbee == true) {
-            GlobalVariables.gaveFrisbeeToDoggo = true;
-        } else if (collision.gameObject.name == "Doggo") {
+        if (collision.gameObject.name == "Doggo") {
             flowchart.ExecuteBlock("Doggo");
         }
     }

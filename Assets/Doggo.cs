@@ -11,6 +11,7 @@ public class Doggo : MonoBehaviour
     GameObject sibling;
     public float delayBetweenBarks = 3;
     float lastBark;
+    public TextMeshProUGUI ugui;
 
     void Start()
     {
@@ -18,35 +19,29 @@ public class Doggo : MonoBehaviour
         sibling = GameObject.Find("Sibling");
         waypoint = GameObject.Find("WayPointDoggo");
         lastBark = Time.time;
+        ugui = this.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     void Update()
     {
-        TextMeshProUGUI ugui = this.GetComponentInChildren<TextMeshProUGUI>();
+        // Dog is watches and chases frisbee
+        GameObject[] frisbees = GameObject.FindGameObjectsWithTag("Frisbee");
+        if (frisbees.Length > 0) {
+            GameObject frisbee = frisbees[0];
 
-        // Dog has frisbee
-        if (GlobalVariables.gaveFrisbeeToDoggo) {
-            ugui.text = "Yip Yip!";
+            float distanceBetweenDogAndFrisbee = (transform.position - frisbee.transform.position).magnitude;
 
-            transform.position = Vector2.MoveTowards(doggo.transform.position, waypoint.transform.position, 2*Time.deltaTime);
-        }
+            if (distanceBetweenDogAndFrisbee < 5) {
+                transform.position = Vector2.MoveTowards(doggo.transform.position, frisbee.transform.position, 3*Time.deltaTime);
+            }
 
-        // Dog is watching for frisbee
-        if (!GlobalVariables.gaveFrisbeeToDoggo) {
-            GameObject[] frisbees = GameObject.FindGameObjectsWithTag("Frisbee");
-
-            if (frisbees.Length > 0) {
-                GameObject frisbee = frisbees[0];
-
-                if ((transform.position - frisbee.transform.position).magnitude < 5) {
-                    transform.position = Vector2.MoveTowards(doggo.transform.position, frisbee.transform.position, 3*Time.deltaTime);
-                }
+            if (distanceBetweenDogAndFrisbee == 0){
+                ugui.text = "Yip Yip!";
             }
         }
 
         // Doggo barks at sibling
         if (GlobalVariables.followPlayer) {
-
             if ((transform.position - sibling.transform.position).magnitude < 8) {
                 Bark();
             }
