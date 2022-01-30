@@ -21,14 +21,11 @@ public class Mom : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Sibling") {
-            GlobalVariables.siblingSaved = true;
-            GlobalVariables.followPlayer = true;
-
+        if (collision.gameObject.name == "Player" && GlobalVariables.followPlayer ) {
             flowchart.ExecuteBlock("Sibling Saved");
-        }
-
-        if (collision.gameObject.name == "Player" && !firstChat) {
+            GlobalVariables.siblingSaved = true;
+            GlobalVariables.followPlayer = false;
+        } else if (collision.gameObject.name == "Player" && !firstChat) {
             firstChat = true;
 
             flowchart.ExecuteBlock("Sibling Missing");

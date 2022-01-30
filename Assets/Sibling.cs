@@ -15,9 +15,11 @@ public class Sibling : MonoBehaviour
     public int Anxiety;
     private Vector2 prevPos;
     private Animator anim;
+    public GameObject mom;
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        mom = GameObject.Find("Mom");
     }
 
     void Start() {
@@ -34,6 +36,12 @@ public class Sibling : MonoBehaviour
     }
 
     void Update() {
+
+        // Move to mom once saved
+        if (GlobalVariables.siblingSaved) {
+            transform.position = Vector2.MoveTowards(rb.transform.position, mom.transform.position, 4*Time.deltaTime);
+        }
+
         // following player 
         if(GlobalVariables.followPlayer) {
             Vector2 toPlayer = player.transform.position - rb.transform.position;
@@ -75,7 +83,10 @@ public class Sibling : MonoBehaviour
         // Animate this tiny kid
         Vector2 pos = rb.transform.position;
         Vector2 velocity = pos - prevPos;
-        if (velocity.x == 0 && velocity.y == 0) {
+        bool isIdle = velocity.x == 0 && velocity.y == 0;
+        if (isIdle && GlobalVariables.siblingSaved) {
+            anim.Play("idle");
+        } else if (isIdle) {
             anim.Play("cry");
         } else if (Mathf.Abs(velocity.x) > Mathf.Abs(velocity.y)) {
             if (velocity.x > 0) {
