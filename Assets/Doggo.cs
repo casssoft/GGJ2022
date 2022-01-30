@@ -7,7 +7,7 @@ public class Doggo : MonoBehaviour
 {
     GameObject doggo;
     GameObject waypoint;
-    public GameObject barkPrefab;
+    public Bark barkPrefab;
     GameObject sibling;
     public float delayBetweenBarks = 3;
     float lastBark;
@@ -85,7 +85,7 @@ public class Doggo : MonoBehaviour
 
     void Bark(){
         if (Time.time - lastBark > delayBetweenBarks) {
-            GameObject bark = Instantiate(barkPrefab, doggo.transform.position, this.gameObject.transform.rotation);
+            Bark bark = Instantiate<Bark>(barkPrefab, doggo.transform.position, this.gameObject.transform.rotation);
             lastBark = Time.time;
         }
     }
