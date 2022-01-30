@@ -25,7 +25,7 @@ public class Mom : MonoBehaviour
             flowchart.ExecuteBlock("Sibling Saved");
             GlobalVariables.siblingSaved = true;
             GlobalVariables.followPlayer = false;
-        } else if (collision.gameObject.name == "Player" && !firstChat) {
+        } else if (collision.gameObject.name == "Player" && !firstChat && !GlobalVariables.siblingSaved) {
             firstChat = true;
 
             flowchart.ExecuteBlock("Sibling Missing");

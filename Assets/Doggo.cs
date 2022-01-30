@@ -14,7 +14,7 @@ public class Doggo : MonoBehaviour
     public TextMeshProUGUI ugui;
     public Animator anim;
     private Vector2 prevPos; // for calculating animation
-    public float frisbeeRadius = 5;
+    public float frisbeeRadius = 10;
     private void Awake()
     {
         anim = GetComponent<Animator>();
