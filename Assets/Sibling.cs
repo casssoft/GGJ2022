@@ -8,7 +8,8 @@ public class Sibling : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject player;
     public GameObject doggo;
-    public GameObject waypoint;
+    public GameObject waypointleft;
+    public GameObject waypointright;
     public TextMeshProUGUI siblingGUI;
     public static bool inFear = false;
     public int Anxiety;
@@ -48,6 +49,11 @@ public class Sibling : MonoBehaviour
 
         // update character text to represent anxiety (for now)
         if (inFear) {
+            GameObject waypoint = waypointleft;
+            if (rb.transform.position.x > waypointleft.transform.position.x)
+            {
+                waypoint = waypointright;
+            }
             transform.position = Vector2.MoveTowards(rb.transform.position, waypoint.transform.position, 3*Time.deltaTime);
             if (rb.transform.position == waypoint.transform.position) {
                 inFear = false;

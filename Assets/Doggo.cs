@@ -14,6 +14,7 @@ public class Doggo : MonoBehaviour
     public TextMeshProUGUI ugui;
     public Animator anim;
     private Vector2 prevPos; // for calculating animation
+    public float frisbeeRadius = 5;
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -38,7 +39,7 @@ public class Doggo : MonoBehaviour
 
             float distanceBetweenDogAndFrisbee = (transform.position - frisbee.transform.position).magnitude;
 
-            if (distanceBetweenDogAndFrisbee < 5) {
+            if (distanceBetweenDogAndFrisbee < frisbeeRadius) {
                 transform.position = Vector2.MoveTowards(doggo.transform.position, frisbee.transform.position, 3*Time.deltaTime);
             }
 
