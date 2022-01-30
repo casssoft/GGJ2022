@@ -8,10 +8,11 @@ public class FrisbeeBullet : MonoBehaviour
     public Rigidbody2D rb;
     public Collider2D collider;
     public Vector2 frisbeePickupVector = new Vector2(0.0f, 0.0f);
+    public Vector2 direction;
     
     void Start()
     {
-        rb.velocity = transform.right * speed;
+        rb.velocity = direction * speed;
     }
 
     void Update() {

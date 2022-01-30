@@ -7,24 +7,30 @@ using Fungus;
 public class Player : MonoBehaviour
 {
 	public Rigidbody2D body;
-    public GameObject frisbeePrefab;
+    public FrisbeeBullet frisbeePrefab;
     public Animator anim;
     public Flowchart flowchart;
     public static bool hasFrisbee;
     public static bool playerIsNearSibling;
+    private Vector2 lastInput = new Vector2(1, 0);
 
 
     void Update()
-    {   
+    {
+        Vector2 playerInput;
+        playerInput.x = Input.GetAxis("Horizontal");
+        playerInput.y = Input.GetAxis("Vertical");
+
+        if (playerInput.magnitude > 0.1)
+        {
+            lastInput = playerInput;
+        }
+
         // Frisbee throwing behavior 
         if (Input.GetButtonDown("Fire1") && hasFrisbee) {
             Shoot();
         }
 
-
-        Vector2 playerInput;
-		playerInput.x = Input.GetAxis("Horizontal");
-		playerInput.y = Input.GetAxis("Vertical");
 		playerInput = Vector2.ClampMagnitude(playerInput, 1f);
         body.velocity = playerInput * 5;
         //body.MovePosition(body.position + playerInput * 50 * Time.deltaTime);
@@ -98,8 +104,11 @@ public class Player : MonoBehaviour
     }
 
     void Shoot() {
-        GameObject frisbee = Instantiate(frisbeePrefab, body.position, this.gameObject.transform.rotation);
-        frisbee.tag = "Frisbee";
+
+        // var name is frisebee
+        FrisbeeBullet frisebee = Instantiate<FrisbeeBullet>(frisbeePrefab, body.position + lastInput.normalized, this.gameObject.transform.rotation);
+        frisebee.tag = "Frisbee";
+        frisebee.direction = lastInput.normalized;
         hasFrisbee = false;
     }
 }
