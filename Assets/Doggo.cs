@@ -54,12 +54,7 @@ public class Doggo : MonoBehaviour
             }
         }
 
-        void Bark(){
-            if (Time.time - lastBark > delayBetweenBarks) {
-                GameObject bark = Instantiate(barkPrefab, doggo.transform.position, this.gameObject.transform.rotation);
-                lastBark = Time.time;
-            }
-        }
+    
         Vector2 pos = transform.position;
         Vector2 velocity = pos - prevPos;
         if (velocity.x == 0 && velocity.y == 0)
@@ -85,5 +80,12 @@ public class Doggo : MonoBehaviour
             }
         }
         prevPos = transform.position;
+    }
+
+    void Bark(){
+        if (Time.time - lastBark > delayBetweenBarks) {
+            GameObject bark = Instantiate(barkPrefab, doggo.transform.position, this.gameObject.transform.rotation);
+            lastBark = Time.time;
+        }
     }
 }

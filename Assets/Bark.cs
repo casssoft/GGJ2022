@@ -12,7 +12,7 @@ public class Bark : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb.velocity = transform.right * speed;
+        rb.velocity = (GameObject.Find("Sibling").transform.position - transform.position).normalized * speed;
     }
 
     // Update is called once per frame
@@ -23,7 +23,6 @@ public class Bark : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.name);
         if (collision.gameObject.name == "Sibling" || collision.gameObject.name == "Player") {
             GlobalVariables.followPlayer = false;
             Sibling.inFear = true;
