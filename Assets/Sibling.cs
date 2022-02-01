@@ -16,10 +16,14 @@ public class Sibling : MonoBehaviour
     private Vector2 prevPos;
     private Animator anim;
     public GameObject mom;
+
+    public AudioSource audio;
+    private bool playOnce = true;
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         mom = GameObject.Find("Mom");
+        audio = GetComponent<AudioSource>();
     }
 
     void Start() {
@@ -57,6 +61,11 @@ public class Sibling : MonoBehaviour
 
         // update character text to represent anxiety (for now)
         if (inFear) {
+            if (playOnce) {
+                playOnce = false;
+                audio.Play();
+            }
+
             GameObject waypoint = waypointleft;
             if (rb.transform.position.x > waypointleft.transform.position.x)
             {
@@ -66,6 +75,10 @@ public class Sibling : MonoBehaviour
             if (rb.transform.position == waypoint.transform.position) {
                 inFear = false;
             }
+        }
+        // reset fear audio
+        if (!inFear) {
+            playOnce = true;
         }
 
         if (Anxiety == 2) {

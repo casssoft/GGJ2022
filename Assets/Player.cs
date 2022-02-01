@@ -13,6 +13,12 @@ public class Player : MonoBehaviour
     public static bool hasFrisbee;
     public static bool playerIsNearSibling;
     private Vector2 lastInput = new Vector2(1, 0);
+    public AudioSource audio;
+    public AudioClip[] audioClips;
+
+    void Start() {
+        audio = GetComponent<AudioSource>();
+    }
 
 
     void Update()
@@ -62,13 +68,13 @@ public class Player : MonoBehaviour
         // Handle interactions
         if (Input.GetKeyDown(KeyCode.E) && playerIsNearSibling)
         {
+            if (GlobalVariables.followPlayer) {
+                audio.PlayOneShot(audioClips[0]);
+            } else {
+                audio.PlayOneShot(audioClips[1]);
+            }
             GlobalVariables.followPlayer = !GlobalVariables.followPlayer;
             flowchart.ExecuteBlock("First dark mode");
-
-            // Turn off the text if you just grabbed ur sibling
-            // Turn on text if you just let them go
-            // TextMeshProUGUI ugui = GlobalVariables.sibling.GetComponentInChildren<TextMeshProUGUI>();
-            // ugui.enabled = !GlobalVariables.followPlayer;
         }
     }
 
@@ -78,13 +84,12 @@ public class Player : MonoBehaviour
         if (collision.gameObject.name == "Sibling")
         {
             playerIsNearSibling = true;
-            // TextMeshProUGUI ugui = collision.GetComponentInChildren<TextMeshProUGUI>();
-            // ugui.enabled = true;
 
             flowchart.ExecuteBlock("Sibling First Chat");
         }
 
         if (collision.gameObject.tag == "Frisbee") {
+            audio.PlayOneShot(audioClips[5]);
             hasFrisbee = true;
             Destroy(collision.gameObject);
         }
@@ -106,9 +111,14 @@ public class Player : MonoBehaviour
     void Shoot() {
 
         // var name is frisebee
+        audio.PlayOneShot(RandomThrowClip());
         FrisbeeBullet frisebee = Instantiate<FrisbeeBullet>(frisbeePrefab, body.position + lastInput.normalized, this.gameObject.transform.rotation);
         frisebee.tag = "Frisbee";
         frisebee.direction = lastInput.normalized;
         hasFrisbee = false;
+    }
+
+    AudioClip RandomThrowClip(){
+        return audioClips[Random.Range(2, 4)];
     }
 }
